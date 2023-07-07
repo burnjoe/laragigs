@@ -10,6 +10,7 @@ class Listing extends Model
     use HasFactory;
 
     // own defined attributes of Listing model
+    // this fixes the required fillable property error thrown by Model::create(array)
     protected $fillable = ['title', 'company', 'location', 'website', 'email', 'tags', 'description'];
 
 
