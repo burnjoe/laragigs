@@ -9,6 +9,10 @@ class Listing extends Model
 {
     use HasFactory;
 
+    // own defined attributes of Listing model
+    protected $fillable = ['title', 'company', 'location', 'website', 'email', 'tags', 'description'];
+
+
     // own defined methods of Listing model:
 
     // filter out table given the query
