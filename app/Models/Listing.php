@@ -11,6 +11,9 @@ class Listing extends Model
 
     // own defined attributes of Listing model
     // this fixes the required fillable property error thrown by Model::create(array)
+    // you can omit this by adding Model:unguard() in boot() of AppServiceProvider.php
+    // though it is not secure (coding level) compare to having fillable
+    // fields should reflect to post data passed into Model::create()
     protected $fillable = ['title', 'company', 'location', 'website', 'email', 'tags', 'description'];
 
 

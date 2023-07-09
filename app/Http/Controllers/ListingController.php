@@ -54,6 +54,9 @@ class ListingController extends Controller
         // will produce fillable error the first time you run it
         Listing::create($formFields);
 
-        return redirect('/');
+        // alternative of with()
+        // Session::flash('message', 'Listing Created Successfully!');
+
+        return redirect('/')->with('message', 'Listing Created Successfully!');
     }
 }
