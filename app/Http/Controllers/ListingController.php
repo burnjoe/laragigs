@@ -21,7 +21,15 @@ class ListingController extends Controller
             // latest() sorts the row/data in descending order
             // tag, search are the names of get request tag is from clicked tags
             // and search is from search bar of the web app 
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get()                
+
+            // previous snippet:
+            // 'listings' => Listing::latest()->filter(request(['tag', 'search']))->get()
+
+            // replaced by:
+            // paginate(numberOfItemPerPage) -> with numbers in view
+            // simplePaginate(numberOfItemPerPage) -> only previous and next buttons
+            // both only works with GET parameters
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
         ]);   
     }
 

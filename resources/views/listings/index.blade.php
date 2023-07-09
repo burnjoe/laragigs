@@ -21,16 +21,19 @@ by using '@' and omitting php tags: --}}
 @if(count($listings) == 0)          {{-- @unless() alternative to @if() --}}
   <p>No listings found</p>
 @else
-
-@foreach($listings as $listing)
-
-<x-listing-card :listing="$listing" />
-
-@endforeach
+  @foreach($listings as $listing)
+    <x-listing-card :listing="$listing" />
+  @endforeach
 @endif
 
 </div>
 
+{{-- this shows page numbers to click for pagination --}}
+<div class="mt-6 p-4">
+  {{$listings->links()}}
+</div>
+
 </x-layout>
+
 {{-- ends the section 'content' --}}
-{{-- @endsection                          --}}
+{{-- @endsection --}}
