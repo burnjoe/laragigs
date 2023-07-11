@@ -58,6 +58,12 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
+        // if post request has logo input,
+        // append logo to formFields + file is uploaded to storage/app/public/logos
+        if($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
         // if validate() did not raise an error, create record
         // will produce fillable error the first time you run it
         Listing::create($formFields);
