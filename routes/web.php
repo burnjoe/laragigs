@@ -48,8 +48,10 @@ Route::post('/listings', [ListingController::class, 'store']);
 Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);     // {listing} - Route model binding
 
 // Edit submit to update
-Route::put('/listings/{listing}', [ListingController::class, 'update']);        // {listing} - Route model binding
+Route::put('/listings/{listing}', [ListingController::class, 'update']);        
 
+// Delete listing
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);        
 
 // Single listing (with controller)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);          // [class, methodName]

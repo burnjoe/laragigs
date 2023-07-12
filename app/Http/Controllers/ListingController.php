@@ -108,4 +108,11 @@ class ListingController extends Controller
         // back() is used to create a redirect response to the user's previous location
         return back()->with('message', 'Listing Updated Successfully!');
     }
+
+    // Delete listing
+    public function destroy(Listing $listing) {
+        $listing->delete();
+        return redirect('/')->with('message', 'Listing Deleted Successfully');
+    }
+    
 }

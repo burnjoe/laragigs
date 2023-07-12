@@ -63,6 +63,15 @@
         <a href="/listings/{{$listing->id}}/edit">
         <i class="fa-solid fa-pencil"></i> Edit
         </a>
+
+        {{-- form for DELETE request (we don't need to create a separate page for delete) --}}
+        <form method="POST" action="/listings/{{$listing->id}}">
+            @csrf
+            {{-- method directive that allows you to have DELETE method for form --}}
+            {{-- since DELETE method is not available as method in form --}}
+            <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
+            @method('DELETE')
+        </form>
     </x-card>
 
 </div>
