@@ -26,6 +26,12 @@ use App\Models\Listing;
 // update - update listing (submit for with changes to inputs)
 // destroy- delete listing (delete)
 
+// HTTP Methods
+// GET    - read / Read
+// POST   - store / Create
+// PUT    - update / Update
+// DELETE - delete / Delete
+
 
 // all of these methods were defined in ListingController controller
 
@@ -37,6 +43,12 @@ Route::get('/listings/create', [ListingController::class, 'create']);
 
 // Store listing data
 Route::post('/listings', [ListingController::class, 'store']);
+
+// Show edit form
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);     // {listing} - Route model binding
+
+// Edit submit to update
+Route::put('/listings/{listing}', [ListingController::class, 'update']);        // {listing} - Route model binding
 
 
 // Single listing (with controller)

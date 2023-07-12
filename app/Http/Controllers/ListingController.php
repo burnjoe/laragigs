@@ -43,7 +43,7 @@ class ListingController extends Controller
 
     // show create form
     public function create() {
-        return view('listings.create');
+        return view('listings.create');         // redirect user to views/listings/create.blade.php
     }
 
     // store listing data
@@ -72,5 +72,40 @@ class ListingController extends Controller
         // Session::flash('message', 'Listing Created Successfully!');
 
         return redirect('/')->with('message', 'Listing Created Successfully!');
+    }
+
+    // show edit form
+    public function edit(Listing $listing) {
+        return view('listings.edit', ['listing' => $listing]);
+    }
+
+    // Edit submit to update
+    public function update(Request $request, Listing $listing) {
+        $formFields = $request->validate([
+            'title' => 'required',
+            'company' => 'required',
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        // if post request has logo input,
+        // append logo to formFields + file is uploaded to storage/app/public/logos
+        if($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
+        // instead of using the Listing class's methods statically,
+        // we can utilize the update() method of the passed listing object
+        $listing->update($formFields);
+
+        // alternative of with()
+        // Session::flash('message', 'Listing Created Successfully!');
+
+        // instead of using redirect() to redirect back to previous page,
+        // back() is used to create a redirect response to the user's previous location
+        return back()->with('message', 'Listing Updated Successfully!');
     }
 }
