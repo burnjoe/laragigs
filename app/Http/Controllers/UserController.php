@@ -29,11 +29,25 @@ class UserController extends Controller
         // create user
         $user = User::create($formFields);
 
-        // login
+        // authenticate user login
         auth()->login($user);
 
         // redirect user with a message:
         return redirect('/')->with('message', 'User created and logged in.');
+    }
+
+    // Log user out
+    public function logout(Request $request) {
+        // authenticate user logout
+        auth()->logout();
+
+        // this destroys the current session. 
+        // removing all data associated with the session and marks it as invalid
+        $request->session()->invalidate();
+        // this regenerates session ID and CSRF token
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('message', 'You have been logged out!');
     }
 
 }
