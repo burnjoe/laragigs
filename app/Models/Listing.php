@@ -39,4 +39,11 @@ class Listing extends Model
                 ->orWhere('location', 'like', '%' . request('search') . '%');
         }
     }
+
+    // Relationship to User
+    // this creates relationship between listing and user
+    public function user() {
+        // this Listing model belongs to this User model refering to 'user_id'
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

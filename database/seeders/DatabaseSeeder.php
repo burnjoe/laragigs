@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use App\Models\Listing;
 use Illuminate\Database\Seeder;
 
@@ -13,9 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(5)->create();                 // populates database with 10 test data
+        // \App\Models\User::factory(5)->create();                  // populates database with 10 test data
 
-        Listing::factory(6)->create();                          // populates listing database with 6 dummy data
+        // creates one user with the prefered user data
+        $user = User::factory()->create([
+            'name' => 'Jholo Sabana',
+            'email' => 'sabanajholo@gmail.com'
+        ]);
+
+        // creates 6 listings owned by the created user
+        // passing the value of the foreign key
+        Listing::factory(6)->create([                               // populates listing database with 6 dummy data
+            'user_id' => $user->id
+        ]);                          
 
 
         // Listing::create([
