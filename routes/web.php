@@ -67,8 +67,11 @@ Route::post('/users', [UserController::class, 'store']);
 // Log user out
 Route::post('/logout', [UserController::class, 'logout']);
 
+// Show login form
+Route::get('/login', [UserController::class, 'login']);
 
-
+// Log in user
+Route::post('/user/authenticate', [UserController::class, 'authenticate']);     // you can refactor URI, this is just preference
 
 
 

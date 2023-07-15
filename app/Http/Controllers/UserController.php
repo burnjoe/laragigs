@@ -44,10 +44,38 @@ class UserController extends Controller
         // this destroys the current session. 
         // removing all data associated with the session and marks it as invalid
         $request->session()->invalidate();
-        // this regenerates session ID and CSRF token
+        // this regenerates only the CSRF token used for CSRF protection 
         $request->session()->regenerateToken();
 
+        // redirect user to the root passing the message to the view
         return redirect('/')->with('message', 'You have been logged out!');
+    }
+
+    // Show login form
+    public function login() {
+        // user.login is a file directory user/login
+        return view('users.login');
+    }
+
+    // Authenticate user
+    public function authenticate(Request $request) {
+        $formFields = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
+
+        // attempts to authenticate the passed credentials: email and password
+        if(auth()->attempt($formFields)) {
+            // regenerates only the session ID effectively creating new session for user (not CSRF token)
+            // regenerate() != regenerateToken()
+            $request->session()->regenerate();
+
+            return redirect('/')->with('message', 'You are now logged in!');
+        }
+
+        // if authentication fails, redirect response to the user's previous location with error message and 
+        // the old data in input element
+        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 
 }
