@@ -39,36 +39,39 @@ use App\Http\Controllers\ListingController;
 // All listings (with controller)
 Route::get('/', [ListingController::class, 'index']);                           // [class, methodname]
 
-// Show create form
-Route::get('/listings/create', [ListingController::class, 'create']);
+// Show create form (with auth middleware)
+// Route authenticated users only
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
 // Store listing data
-Route::post('/listings', [ListingController::class, 'store']);
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
 // Show edit form
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);     // {listing} - Route model binding
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');     // {listing} - Route model binding
 
 // Edit submit to update
-Route::put('/listings/{listing}', [ListingController::class, 'update']);        
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');        
 
 // Delete listing
-Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);        
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');        
 
 // Single listing (with controller)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);          // [class, methodName]
 
 
-// Show register/create form
-Route::get('/register', [UserController::class, 'create']);
+// Show register/create form (with guest middleware)
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 // Create new user
 Route::post('/users', [UserController::class, 'store']);
 
-// Log user out
-Route::post('/logout', [UserController::class, 'logout']);
+// Log user out 
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 // Show login form
-Route::get('/login', [UserController::class, 'login']);
+// name('login') is used to define Route login (names this Route)
+// refering to route('login') in app/Http/Middleware/Authenticate.php
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 // Log in user
 Route::post('/user/authenticate', [UserController::class, 'authenticate']);     // you can refactor URI, this is just preference
