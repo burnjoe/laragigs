@@ -67,4 +67,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Laravel Crash Course YouTube 
 
-Traversy Media: https://youtu.be/MYyJ4PuL4pY
+[Traversy Media Crash Course](https://youtu.be/MYyJ4PuL4pY)
