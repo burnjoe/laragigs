@@ -1,5 +1,5 @@
 To Do:
-1.
+1. Do not allow redirection to edit and delete form (URI), if user does not own the selected listing
 
 
 
