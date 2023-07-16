@@ -1,0 +1,9 @@
+To Do:
+1.
+
+
+
+
+Issues:
+1. App\Http\Controllers\ListingController
+-> In manage() method, VSCode detects listings() as a non-existing method in Listing Model, though it is and works in run time
