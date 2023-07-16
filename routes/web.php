@@ -55,6 +55,9 @@ Route::put('/listings/{listing}', [ListingController::class, 'update'])->middlew
 // Delete listing
 Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');        
 
+// Manage listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
+
 // Single listing (with controller)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);          // [class, methodName]
 
@@ -75,6 +78,7 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // Log in user
 Route::post('/user/authenticate', [UserController::class, 'authenticate']);     // you can refactor URI, this is just preference
+
 
 
 

@@ -64,6 +64,9 @@ class ListingController extends Controller
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
+        // sets the listing to be stored as owned by the current user logged in
+        $formFields['user_id'] = auth()->id();
+
         // if validate() did not raise an error, create record
         // will produce fillable error the first time you run it
         Listing::create($formFields);
@@ -81,6 +84,13 @@ class ListingController extends Controller
 
     // Edit submit to update
     public function update(Request $request, Listing $listing) {
+        // Make sure logged in user is owner
+        if($listing->user_id != auth()->id()) {
+            // if user_id of the listing is not equal to id of currently logged in user
+            // throw error 403
+            abort(403, 'Unauthorized Action');
+        }
+
         $formFields = $request->validate([
             'title' => 'required',
             'company' => 'required',
@@ -111,8 +121,24 @@ class ListingController extends Controller
 
     // Delete listing
     public function destroy(Listing $listing) {
+        // Make sure logged in user is owner
+        if($listing->user_id != auth()->id()) {
+            // if user_id of the listing is not equal to id of currently logged in user
+            // throw error 403
+            abort(403, 'Unauthorized Action');
+        }
+
         $listing->delete();
         return redirect('/')->with('message', 'Listing Deleted Successfully');
     }
     
+    // Manage listings
+    public function manage() {
+        // retrieves the currently authenticated user
+        // then get the collection of listings owned by the authenticated user
+        // this fetches the listings associated with the currently authenticated user 
+        // passing them to view template 'listing.manage'
+        return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);      
+    }
+
 }

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         // creates one user with the prefered user data
         $user = User::factory()->create([
             'name' => 'Jholo Sabana',
-            'email' => 'sabanajholo@gmail.com'
+            'email' => 'sabanajholo@gmail.com',
+            'password' => bcrypt('burnjoe')
         ]);
 
         // creates 6 listings owned by the created user

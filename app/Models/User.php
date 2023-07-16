@@ -45,8 +45,9 @@ class User extends Authenticatable
 
     // Relationship with Listing
     // this creates relationship between listing and user
-    public function listing() {
+    public function listings() {
         // this User model has or owns many Listing model refering to 'user_id'
+        // this returns a collection of Listings objects associated with this user
         return $this->hasMany(Listing::class, 'user_id');
     }
 }

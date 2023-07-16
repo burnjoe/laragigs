@@ -59,20 +59,20 @@
     </x-card>
 
 
-    <x-card class="mt-4 p-2 flex space-x-6">
+    {{-- <x-card class="mt-4 p-2 flex space-x-6">
         <a href="/listings/{{$listing->id}}/edit">
         <i class="fa-solid fa-pencil"></i> Edit
-        </a>
+        </a> --}}
 
         {{-- form for DELETE request (we don't need to create a separate page for delete) --}}
-        <form method="POST" action="/listings/{{$listing->id}}">
-            @csrf
+        {{-- <form method="POST" action="/listings/{{$listing->id}}">
+            @csrf --}}
             {{-- method directive that allows you to have DELETE method for form --}}
             {{-- since DELETE method is not available as method in form --}}
-            <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
+            {{-- <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
             @method('DELETE')
         </form>
-    </x-card>
+    </x-card> --}}
 
 </div>
 
